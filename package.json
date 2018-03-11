@@ -8,11 +8,15 @@
   "scripts": {
     "dev": "cross-env TS_NODE_PROJECT=\"config/tsconfig.json\" webpack-dev-server --config config/webpack.config.ts --mode development",
     "build": "cross-env TS_NODE_PROJECT=\"config/tsconfig.json\" webpack --config config/webpack.config.ts --mode production",
+    "typecheck": "tsc",
     "format": "prettier \"{src,config}/**/*.{ts,tsx}\"",
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,ts,tsx,json,md}": ["prettier --write", "git add"]
+    "*.{js,ts,tsx,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "dependencies": {
     "react": "^16.2.0",
@@ -35,6 +39,9 @@
     "lint-staged": "^7.0.0",
     "prettier": "^1.11.1",
     "ts-node": "^5.0.1",
+    "tslint": "^5.9.1",
+    "tslint-language-service": "^0.9.8",
+    "tslint-react": "^3.5.1",
     "typescript": "^2.7.2",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.11",
