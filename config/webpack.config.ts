@@ -1,9 +1,14 @@
+import * as path from 'path';
 import * as webpack from 'webpack';
-import * as HtmlWebpackPlugin from 'html-webpack-plugin';
+import * as nodeExternals from 'webpack-node-externals';
 
 interface Options {
   prod?: boolean;
 }
+
+const resolve: webpack.Resolve = {
+  extensions: ['.js', '.ts', '.tsx'],
+};
 
 interface RuleOptions {
   target: 'server' | 'client';
@@ -40,16 +45,47 @@ const createRules: (env: RuleOptions) => webpack.Rule[] = ({ target }) => [
 
 type FunctionConfig = (env: Options) => webpack.Configuration;
 
-const createClientConfig: FunctionConfig = ({ prod = false }) => ({
+export const createClientConfig: FunctionConfig = ({ prod = false }) => ({
   mode: prod ? 'production' : 'development',
-  entry: './src/index.tsx',
-  resolve: {
-    extensions: ['.js', '.ts', '.tsx'],
+  name: 'client',
+  get entry() {
+    const entry = ['./src/client'];
+    if (process.env.NODE_ENV === 'development') {
+      return ['webpack-hot-middleware/client', ...entry];
+    }
+
+    return entry;
   },
+  output: {
+    path: path.join(process.cwd(), 'dist/assets/js'),
+    publicPath: '/assets/js',
+  },
+  resolve,
   module: {
     rules: createRules({ target: 'client' }),
   },
-  plugins: [new HtmlWebpackPlugin({ template: './src/index.html' })],
+  get plugins() {
+    if (process.env.NODE_ENV === 'development') {
+      return [new webpack.HotModuleReplacementPlugin()];
+    }
+  },
 });
 
-export default [createClientConfig];
+export const createServerConfig: FunctionConfig = ({ prod = false }) => ({
+  mode: prod ? 'production' : 'development',
+  name: 'server',
+  entry: prod ? './src/server/prod-server' : './src/server',
+  target: 'node',
+  node: {
+    __dirname: false,
+    __filename: false,
+  },
+  output: { filename: 'server.js', libraryTarget: 'commonjs2' },
+  resolve,
+  module: {
+    rules: createRules({ target: 'server' }),
+  },
+  externals: [nodeExternals()],
+});
+
+export default [createClientConfig, createServerConfig];
