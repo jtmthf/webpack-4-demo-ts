@@ -6,7 +6,7 @@
   "author": "Jack Moore <jtmthf@mst.edu>",
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env TS_NODE_PROJECT=\"config/tsconfig.json\" webpack-dev-server --config config/webpack.config.ts --mode development",
+    "dev": "cross-env TS_NODE_PROJECT=\"config/tsconfig.json\" webpack-dev-server --config config/webpack.config.ts --mode development --hot",
     "build": "cross-env TS_NODE_PROJECT=\"config/tsconfig.json\" webpack --config config/webpack.config.ts --mode production",
     "typecheck": "tsc",
     "format": "prettier \"{src,config}/**/*.{ts,tsx}\"",
@@ -20,7 +20,8 @@
   },
   "dependencies": {
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-hot-loader": "^4.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.40",

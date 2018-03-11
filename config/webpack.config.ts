@@ -4,7 +4,7 @@ import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 const config: webpack.Configuration = {
   entry: './src/index.tsx',
   resolve: {
-    extensions: ['.js', '.ts', '.tsx']
+    extensions: ['.js', '.ts', '.tsx'],
   },
   module: {
     rules: [
@@ -18,22 +18,24 @@ const config: webpack.Configuration = {
             presets: [
               '@babel/preset-typescript',
               '@babel/preset-react',
-              ['@babel/preset-env', {
-                useBuiltins: 'usage',
-                modules: false,
-                targets: {
-                  browsers: ['> 1%', 'ie 11']
-                }
-              }]
-            ]
-          }
+              [
+                '@babel/preset-env',
+                {
+                  useBuiltins: 'usage',
+                  modules: false,
+                  targets: {
+                    browsers: ['> 1%', 'ie 11'],
+                  },
+                },
+              ],
+            ],
+            plugins: ['react-hot-loader/babel'],
+          },
         },
-      }
-    ]
+      },
+    ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({template: './src/index.html'})
-  ]
-}
+  plugins: [new HtmlWebpackPlugin({ template: './src/index.html' })],
+};
 
 export default config;
