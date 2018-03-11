@@ -7,7 +7,12 @@
   "license": "MIT",
   "scripts": {
     "dev": "cross-env TS_NODE_PROJECT=\"config/tsconfig.json\" webpack-dev-server --config config/webpack.config.ts --mode development",
-    "build": "cross-env TS_NODE_PROJECT=\"config/tsconfig.json\" webpack --config config/webpack.config.ts --mode production"
+    "build": "cross-env TS_NODE_PROJECT=\"config/tsconfig.json\" webpack --config config/webpack.config.ts --mode production",
+    "format": "prettier \"{src,config}/**/*.{ts,tsx}\"",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,json,md}": ["prettier --write", "git add"]
   },
   "dependencies": {
     "react": "^16.2.0",
@@ -26,6 +31,9 @@
     "babel-loader": "^8.0.0-beta.2",
     "cross-env": "^5.1.4",
     "html-webpack-plugin": "^3.0.6",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.0.0",
+    "prettier": "^1.11.1",
     "ts-node": "^5.0.1",
     "typescript": "^2.7.2",
     "webpack": "^4.1.1",
