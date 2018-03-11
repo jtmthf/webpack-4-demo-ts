@@ -6,8 +6,8 @@
   "author": "Jack Moore <jtmthf@mst.edu>",
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env TS_NODE_PROJECT=\"config/tsconfig.json\" webpack-dev-server --config config/webpack.config.ts --mode development --hot",
-    "build": "cross-env TS_NODE_PROJECT=\"config/tsconfig.json\" webpack --config config/webpack.config.ts --mode production",
+    "dev": "cross-env TS_NODE_PROJECT=\"config/tsconfig.json\" webpack-dev-server --config config/webpack.config.ts --env --hot",
+    "build": "cross-env TS_NODE_PROJECT=\"config/tsconfig.json\" webpack --config config/webpack.config.ts --env.prod",
     "typecheck": "tsc",
     "format": "prettier \"{src,config}/**/*.{ts,tsx}\"",
     "precommit": "lint-staged"
@@ -19,6 +19,7 @@
     ]
   },
   "dependencies": {
+    "express": "^4.16.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^4.0.0"
@@ -28,11 +29,13 @@
     "@babel/preset-env": "^7.0.0-beta.40",
     "@babel/preset-react": "^7.0.0-beta.40",
     "@babel/preset-typescript": "^7.0.0-beta.40",
+    "@types/express": "^4.11.1",
     "@types/html-webpack-plugin": "^2.30.3",
     "@types/node": "^9.4.7",
     "@types/react": "^16.0.40",
     "@types/react-dom": "^16.0.4",
     "@types/webpack": "^4.1.0",
+    "@types/webpack-node-externals": "^1.6.3",
     "babel-loader": "^8.0.0-beta.2",
     "cross-env": "^5.1.4",
     "html-webpack-plugin": "^3.0.6",
@@ -46,6 +49,10 @@
     "typescript": "^2.7.2",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.11",
-    "webpack-dev-server": "^3.1.1"
+    "webpack-dev-middleware": "^3.0.1",
+    "webpack-dev-server": "^3.1.1",
+    "webpack-hot-middleware": "^2.21.2",
+    "webpack-hot-server-middleware": "^0.4.0",
+    "webpack-node-externals": "^1.6.0"
   }
 }

@@ -499,9 +499,35 @@
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
 
+"@types/body-parser@*":
+  version "1.16.8"
+  resolved "https://registry.yarnpkg.com/@types/body-parser/-/body-parser-1.16.8.tgz#687ec34140624a3bec2b1a8ea9268478ae8f3be3"
+  dependencies:
+    "@types/express" "*"
+    "@types/node" "*"
+
 "@types/clean-css@*":
   version "3.4.30"
   resolved "https://registry.yarnpkg.com/@types/clean-css/-/clean-css-3.4.30.tgz#0052c136f5248002428e3638b37de4a39818641d"
+
+"@types/events@*":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@types/events/-/events-1.2.0.tgz#81a6731ce4df43619e5c8c945383b3e62a89ea86"
+
+"@types/express-serve-static-core@*":
+  version "4.11.1"
+  resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.11.1.tgz#f6f7212382d59b19d696677bcaa48a37280f5d45"
+  dependencies:
+    "@types/events" "*"
+    "@types/node" "*"
+
+"@types/express@*", "@types/express@^4.11.1":
+  version "4.11.1"
+  resolved "https://registry.yarnpkg.com/@types/express/-/express-4.11.1.tgz#f99663b3ab32d04cb11db612ef5dd7933f75465b"
+  dependencies:
+    "@types/body-parser" "*"
+    "@types/express-serve-static-core" "*"
+    "@types/serve-static" "*"
 
 "@types/html-minifier@*":
   version "3.5.1"
@@ -517,6 +543,10 @@
   dependencies:
     "@types/html-minifier" "*"
     "@types/webpack" "*"
+
+"@types/mime@*":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@types/mime/-/mime-2.0.0.tgz#5a7306e367c539b9f6543499de8dd519fac37a8b"
 
 "@types/node@*", "@types/node@^9.4.7":
   version "9.4.7"
@@ -537,6 +567,13 @@
   version "0.2.28"
   resolved "https://registry.yarnpkg.com/@types/relateurl/-/relateurl-0.2.28.tgz#6bda7db8653fa62643f5ee69e9f69c11a392e3a6"
 
+"@types/serve-static@*":
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/@types/serve-static/-/serve-static-1.13.1.tgz#1d2801fa635d274cd97d4ec07e26b21b44127492"
+  dependencies:
+    "@types/express-serve-static-core" "*"
+    "@types/mime" "*"
+
 "@types/tapable@*":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@types/tapable/-/tapable-1.0.0.tgz#b76254453021be05681f6213416766bac9afb99c"
@@ -546,6 +583,12 @@
   resolved "https://registry.yarnpkg.com/@types/uglify-js/-/uglify-js-2.6.30.tgz#257d2b6dd86673d60da476680fba90f2e30c6eef"
   dependencies:
     source-map "^0.6.1"
+
+"@types/webpack-node-externals@^1.6.3":
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/@types/webpack-node-externals/-/webpack-node-externals-1.6.3.tgz#a70ecab38339ab219d0090680c98c4973a90af01"
+  dependencies:
+    "@types/webpack" "*"
 
 "@types/webpack@*", "@types/webpack@^4.1.0":
   version "4.1.0"
@@ -5392,7 +5435,7 @@ querystring-es3@^0.2.0:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/querystring-es3/-/querystring-es3-0.2.1.tgz#9ec61f79049875707d69414596fd907a4d711e73"
 
-querystring@0.2.0:
+querystring@0.2.0, querystring@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/querystring/-/querystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"
 
@@ -6140,7 +6183,7 @@ source-map-resolve@^0.5.0:
     source-map-url "^0.4.0"
     urix "^0.1.0"
 
-source-map-support@^0.4.15:
+source-map-support@^0.4.15, source-map-support@^0.4.2:
   version "0.4.18"
   resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.4.18.tgz#0286a6de8be42641338594e97ccea75f0a2c585f"
   dependencies:
@@ -6945,7 +6988,7 @@ webpack-cli@^2.0.11:
     yeoman-environment "^2.0.0"
     yeoman-generator "^2.0.3"
 
-webpack-dev-middleware@3.0.1:
+webpack-dev-middleware@3.0.1, webpack-dev-middleware@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/webpack-dev-middleware/-/webpack-dev-middleware-3.0.1.tgz#7ffd6d0192883c83d3f262e8d7dec822493c6166"
   dependencies:
@@ -6990,6 +7033,23 @@ webpack-dev-server@^3.1.1:
     webpack-log "^1.1.2"
     yargs "9.0.1"
 
+webpack-hot-middleware@^2.21.2:
+  version "2.21.2"
+  resolved "https://registry.yarnpkg.com/webpack-hot-middleware/-/webpack-hot-middleware-2.21.2.tgz#2e2aa65563b8b32546b67e53b5a9667dcd80f327"
+  dependencies:
+    ansi-html "0.0.7"
+    html-entities "^1.2.0"
+    querystring "^0.2.0"
+    strip-ansi "^3.0.0"
+
+webpack-hot-server-middleware@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/webpack-hot-server-middleware/-/webpack-hot-server-middleware-0.4.0.tgz#757d4b8c24cc9c5d09b6eb3028b79350424b923e"
+  dependencies:
+    debug "^2.2.0"
+    require-from-string "^2.0.1"
+    source-map-support "^0.4.2"
+
 webpack-log@^1.0.1, webpack-log@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/webpack-log/-/webpack-log-1.1.2.tgz#cdc76016537eed24708dc6aa3d1e52189efee107"
@@ -6998,6 +7058,10 @@ webpack-log@^1.0.1, webpack-log@^1.1.2:
     log-symbols "^2.1.0"
     loglevelnext "^1.0.1"
     uuid "^3.1.0"
+
+webpack-node-externals@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/webpack-node-externals/-/webpack-node-externals-1.6.0.tgz#232c62ec6092b100635a3d29d83c1747128df9bd"
 
 webpack-sources@^1.0.1, webpack-sources@^1.1.0:
   version "1.1.0"
