@@ -1,4 +1,5 @@
 import * as express from 'express';
+import * as path from 'path';
 import * as webpack from 'webpack';
 import * as webpackDevMiddleware from 'webpack-dev-middleware';
 import * as webpackHotMiddleware from 'webpack-hot-middleware';
@@ -35,7 +36,14 @@ const devMiddleware = webpackDevMiddleware(
 
 app.use(devMiddleware);
 app.use(webpackHotMiddleware(clientCompiler!));
-app.use(webpackHotServerMiddleware(compiler));
+app.use(
+  webpackHotServerMiddleware(compiler, {
+    serverRendererOptions: {
+      fileSystem: (clientCompiler as any).outputFileSystem,
+      currentDirectory: path.join(__dirname, '..'),
+    },
+  }),
+);
 
 const port = process.env.PORT || 3000;
 

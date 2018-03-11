@@ -1,3 +1,4 @@
+import * as fs from 'fs';
 import * as path from 'path';
 
 import * as express from 'express';
@@ -7,7 +8,12 @@ import serverRender from '.';
 const app = express();
 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
-app.use(serverRender());
+app.use(
+  serverRender({
+    currentDirectory: path.join(__dirname, '..'),
+    fileSystem: fs,
+  }),
+);
 
 const port = process.env.PORT || 3000;
 

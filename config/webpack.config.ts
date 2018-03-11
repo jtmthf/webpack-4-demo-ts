@@ -69,6 +69,21 @@ export const createClientConfig: FunctionConfig = ({ prod = false }) => ({
       return [new webpack.HotModuleReplacementPlugin()];
     }
   },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          name: 'vendor',
+        },
+      } as any,
+    },
+    runtimeChunk: {
+      name: 'runtime',
+    },
+  },
 });
 
 export const createServerConfig: FunctionConfig = ({ prod = false }) => ({
