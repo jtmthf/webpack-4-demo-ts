@@ -3,11 +3,18 @@
     "module": "esnext",
     "target": "esnext",
     "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "jsx": "react",
     "noEmit": true,
     "rootDir": "src",
-    "plugins": [{ "name": "tslint-language-service" }]
-  }
+    "plugins": [
+      { "name": "tslint-language-service" },
+      { "name": "typescript-styled-plugin" }
+    ]
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }

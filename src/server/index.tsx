@@ -1,3 +1,4 @@
+import { renderStylesToString } from 'emotion-server';
 import * as express from 'express';
 import * as path from 'path';
 import React from 'react';
@@ -33,8 +34,8 @@ export default function serverRender({
     .readFileSync(path.join(currentDirectory, `dist/assets/js/${runtimePath}`))
     .toString();
 
-  return (req, res) => {
-    const html = renderToString(<App />);
+  return (_, res) => {
+    const html: string = renderStylesToString(renderToString(<App />));
 
     res.send(`
       <!DOCTYPE html>

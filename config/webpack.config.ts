@@ -14,9 +14,13 @@ const resolve: webpack.Resolve = {
 
 interface RuleOptions {
   target: 'server' | 'client';
+  prod: boolean;
 }
 
-const createRules: (env: RuleOptions) => webpack.Rule[] = ({ target }) => [
+const createRules: (env: RuleOptions) => webpack.Rule[] = ({
+  target,
+  prod,
+}) => [
   {
     test: /(\.ts|\.tsx)$/,
     exclude: /node_modules/,
@@ -39,7 +43,13 @@ const createRules: (env: RuleOptions) => webpack.Rule[] = ({ target }) => [
             },
           ],
         ],
-        plugins: ['react-hot-loader/babel'],
+        plugins: [
+          'react-hot-loader/babel',
+          [
+            'emotion',
+            prod ? { hoist: true } : { sourceMap: true, autoLabel: true },
+          ],
+        ],
       },
     },
   },
@@ -66,7 +76,7 @@ export const createClientConfig: FunctionConfig = ({ prod = false }) => ({
   },
   resolve,
   module: {
-    rules: createRules({ target: 'client' }),
+    rules: createRules({ target: 'client', prod }),
   },
   get plugins() {
     if (process.env.NODE_ENV === 'development') {
@@ -107,7 +117,7 @@ export const createServerConfig: FunctionConfig = ({ prod = false }) => ({
   output: { filename: 'server.js', libraryTarget: 'commonjs2' },
   resolve,
   module: {
-    rules: createRules({ target: 'server' }),
+    rules: createRules({ target: 'server', prod }),
   },
   externals: [nodeExternals()],
 });
