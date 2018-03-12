@@ -1,4 +1,6 @@
 import * as path from 'path';
+
+import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as webpack from 'webpack';
 import * as nodeExternals from 'webpack-node-externals';
 
@@ -57,8 +59,10 @@ export const createClientConfig: FunctionConfig = ({ prod = false }) => ({
     return entry;
   },
   output: {
-    path: path.join(process.cwd(), 'dist/assets/js'),
-    publicPath: '/assets/js',
+    path: path.join(process.cwd(), 'dist/assets'),
+    filename: prod ? 'js/[name].[chunkhash].js' : 'js/[name].js',
+    chunkFilename: prod ? 'js/[name].[chunkhash].js' : 'js/[name].js',
+    publicPath: '/assets/',
   },
   resolve,
   module: {
@@ -67,6 +71,13 @@ export const createClientConfig: FunctionConfig = ({ prod = false }) => ({
   get plugins() {
     if (process.env.NODE_ENV === 'development') {
       return [new webpack.HotModuleReplacementPlugin()];
+    } else {
+      return [
+        new CleanWebpackPlugin('dist', {
+          root: process.cwd(),
+        }),
+        new webpack.HashedModuleIdsPlugin(),
+      ];
     }
   },
   optimization: {
@@ -80,9 +91,7 @@ export const createClientConfig: FunctionConfig = ({ prod = false }) => ({
         },
       } as any,
     },
-    runtimeChunk: {
-      name: 'runtime',
-    },
+    runtimeChunk: { name: 'runtime' },
   },
 });
 

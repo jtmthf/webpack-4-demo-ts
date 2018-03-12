@@ -7,7 +7,13 @@ import serverRender from '.';
 
 const app = express();
 
-app.use('/assets', express.static(path.join(__dirname, 'assets')));
+app.use(
+  '/assets',
+  express.static(path.join(__dirname, 'assets'), {
+    maxAge: 1000 * 60 * 60 * 24 * 365,
+    immutable: true,
+  }),
+);
 app.use(
   serverRender({
     currentDirectory: path.join(__dirname, '..'),
